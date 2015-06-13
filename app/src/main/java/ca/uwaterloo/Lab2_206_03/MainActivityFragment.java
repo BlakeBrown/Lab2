@@ -45,25 +45,16 @@ public class MainActivityFragment extends Fragment {
         // Initialize the sensor manager for our sensors
         sensorManager = (SensorManager) rootView.getContext().getSystemService(rootView.getContext().SENSOR_SERVICE);
 
+        // Create a text view to hold our number of steps
+        TextView stepsTextView = new TextView(rootView.getContext());
         // Create the accelerometer sensor event listener
-        TextView accelerationMagnitudeTextView = new TextView(rootView.getContext());
-        TextView xTextView = new TextView(rootView.getContext());
-        TextView yTextView = new TextView(rootView.getContext());
-        TextView zTextView = new TextView(rootView.getContext());
-        accelerometerEventListener = new AccelerometerSensorEventListener(graph, reset_button, xTextView, yTextView, zTextView);
+        accelerometerEventListener = new AccelerometerSensorEventListener(graph, reset_button, stepsTextView);
+        // TYPE_LINEAR_ACCELERATION is the same as TYPE_ACCELEROMETER but without gravity
+        // SENSOR_DELAY_FASTEST is the fastest rate at which to read sensor data
         sensorManager.registerListener(accelerometerEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION), SensorManager.SENSOR_DELAY_FASTEST);
 
-        // Add the text views to our layout
-        TextView newLine1 = new TextView(rootView.getContext()),newLine2 = new TextView(rootView.getContext()), newLine3 = new TextView(rootView.getContext()), newLine4 = new TextView(rootView.getContext());
-        newLine1.setText("");
-        newLine2.setText("");
-        newLine3.setText("");
-        newLine4.setText("");
-        layout.addView(newLine1);
-        layout.addView(newLine2);
-        layout.addView(xTextView);
-        layout.addView(yTextView);
-        layout.addView(zTextView);
+        // Add the text view to our layout
+        layout.addView(stepsTextView);
         return rootView;
     }
 
