@@ -118,7 +118,7 @@ public class AccelerometerSensorEventListener implements SensorEventListener {
                 if(timeDiff > 100) {
                     currentDerivative = calcDerivative(currentMagnitude, currentTimestamp);
                     // Bulk of the step checking, implements steps 2-6 as mentioned above
-                    if(largestMagnitudeInPast20Readings < 5 && currentMagnitude > 1 && currentDerivative < 0 && prevDerivative > 0 && (timeDiff > 600) && (timeDiff < 1000)) {
+                    if(largestMagnitudeInPast20Readings < 5 && currentMagnitude > 1.3 && currentDerivative < 0 && prevDerivative > 0 && (timeDiff > 600) && (timeDiff < 1000)) {
                         steps += 1;
                         lastStepTimestamp = currentTimestamp;
                         magnitudeOfStep = currentMagnitude;
